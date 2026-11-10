@@ -1,0 +1,6 @@
+{
+    "name": "marvi/swe_final-php_project",
+    "require": {
+        "vlucas/phpdotenv": "^5.8"
+    }
+}
