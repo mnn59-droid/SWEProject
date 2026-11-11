@@ -1,25 +1,19 @@
 <?php
-
-require_once __DIR__ . '/../src/config.php';
 require_once __DIR__ . '/../src/bootstrap.php';
-$products = db()->query('SELECT product_name, price, stock FROM products ORDER BY id')->fetchAll();
+$products = getAllProducts();
+
+$pageTitle = 'Shop';
+include __DIR__ . '/../templates/header.php';
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Database  test</title>
-    </head>
-    <body>
-        <h1> <?php echo count($products) ?> Product found</h1>
-        <ul>
-            <?php foreach($products as $product): ?>
-                <li>
-                    <?php echo e($product['product_name']) ?> - <?php echo money($product['price']) ?> - <?php echo e($product['stock']) ?>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-    </body>
-</html>
+
+<h1 class="page-title">Welcome to <?php echo e($shopName) ?></h1>
+<p class="page-subtitle"><?php echo count($products) ?> products available</p>
+
+<section class="product-grid">
+    <?php foreach ($products as $product) { ?>
+        <?php include __DIR__ . '/../templates/product-card.php'; ?>
+    <?php } ?>
+    </section>
+
+    <?php include __DIR__ . '/../templates/footer.php'; ?>
