@@ -13,4 +13,7 @@ echo "update #2 to 0:     "; var_dump(updateCartItem(2, 0)); // NULL, #2 removed
 echo "\ncart:  "; print_r(getCart());                      // expect [1 => 3]
 echo "count: " . cartCount();                               // expect 3
 echo '</pre>';
+echo '<pev>';
+print_r(cartSummary());
+echo '</prev>';
 ?>
