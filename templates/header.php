@@ -1,6 +1,6 @@
 <?php
 //shared top of every page
-$shopName = "Think Coffee";
+$shopName = "Catura Coffee";
 $pageTitle = isset($pageTitle) ? $pageTitle : $shopName;
 $cartCount = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;//total items in cart
 

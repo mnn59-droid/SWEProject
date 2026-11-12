@@ -5,7 +5,9 @@
 //every product in a catalog
 function getAllProducts(): array
 {
-    $sql = 'SELECT id, product_name, description, price, stock, category, image_path FROM products ORDER BY id';
+    $sql = 'SELECT id, product_name, description, price, stock, category, image_path, roast_level
+    FROM products
+    ORDER BY id';
     return db()->query($sql)->fetchAll();
 }
 
