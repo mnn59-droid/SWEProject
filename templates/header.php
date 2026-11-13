@@ -1,9 +1,8 @@
 <?php
 //shared top of every page
-$shopName = "Catura Coffee";
+$shopName = "Katura Coffee";
 $pageTitle = isset($pageTitle) ? $pageTitle : $shopName;
-$cartCount = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;//total items in cart
-
+$cartCount = cartCount();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +18,7 @@ $cartCount = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;//total ite
             <nav class="site-nav">
                 <a href="/">Shop</a>
                 <a href="/cart.php" class="cart-link">
-                    Cart(<span class="cart-count"><?php echo e($cartCount) ?></span>)
+                    Cart(<span id="cart-count"><?php echo e($cartCount) ?></span>)
                 </a>
             </nav>
         </header>

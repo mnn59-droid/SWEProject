@@ -38,8 +38,7 @@ alt="<?php echo e($product['product_name']); ?>">
     <span class ="product-category"><?php echo e($product['category']); ?></span>
     <h1 class="page-title"><?php echo e($product['product_name']); ?></h1>
     <p class="product-detail-price"><?php echo money($product['price']); ?></p>
-    <p class="product-detail-price"><?php echo money($product['price']); ?></p>
-        <?php include __DIR__ . '/../templates/roast-meter.php'; ?>        ← add this
+        <?php include __DIR__ . '/../templates/roast-meter.php'; ?>
     <p class = "product-detail-description"><?php echo e($product['description']); ?></p>
 
     <?php if (!$inStock) { ?>
