@@ -34,8 +34,8 @@ include __DIR__ . '/../templates/header.php';
             value="<?php echo e($item['quantity']); ?>"
             min="0"
             max="<?php echo e($item['product']['stock']); ?>"
-            data-id="<?php echo e($item['product']['id']); ?>">
-            data-price="<?php echo e($item['product']['price']); ?>"
+            data-id="<?php echo e($item['product']['id']); ?>"
+            data-price="<?php echo e($item['product']['price']); ?>">
     </td>
     <td><?php echo money($item['line_total']); ?> </td>
     <td> 
