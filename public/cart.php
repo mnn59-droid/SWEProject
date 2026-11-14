@@ -35,11 +35,13 @@ include __DIR__ . '/../templates/header.php';
             min="0"
             max="<?php echo e($item['product']['stock']); ?>"
             data-id="<?php echo e($item['product']['id']); ?>">
+            data-price="<?php echo e($item['product']['price']); ?>"
     </td>
     <td><?php echo money($item['line_total']); ?> </td>
     <td> 
         <button type="button" class="remove-item" data-id="<?php echo e($item['product']['id']); ?>">Remove</button>
     </td>
+    <td class="line-total"><?php echo money($item['line_total']); ?> </td>
 </tr>
 <?php } ?>
 </tbody>
