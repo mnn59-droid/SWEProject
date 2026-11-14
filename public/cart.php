@@ -10,13 +10,11 @@ include __DIR__ . '/../templates/header.php';
     <h1 class="page-title"> My Cart</h1>
     <?php if (empty($summary['items'])){ ?>
     <p>Please Select items to continue </p>
-    <a href= /public/index.php >Shop</a>
+    <a href= / >Shop</a>
 
     <?php } else { ?>
     <table class="cart-table">
-            <thead>
-                    cart items
-            </thead>
+    <tr><th>Product</th><th>Price</th><th>Quantity</th><th>Total</th><th></th></tr>
 <tbody>
     <?php foreach ($summary['items'] as $item) { ?> 
 <tr>
@@ -37,11 +35,10 @@ include __DIR__ . '/../templates/header.php';
             data-id="<?php echo e($item['product']['id']); ?>"
             data-price="<?php echo e($item['product']['price']); ?>">
     </td>
-    <td><?php echo money($item['line_total']); ?> </td>
+    <td class="line-total"><?php echo money($item['line_total']); ?> </td>
     <td> 
         <button type="button" class="remove-item" data-id="<?php echo e($item['product']['id']); ?>">Remove</button>
     </td>
-    <td class="line-total"><?php echo money($item['line_total']); ?> </td>
 </tr>
 <?php } ?>
 </tbody>
@@ -49,7 +46,7 @@ include __DIR__ . '/../templates/header.php';
     <div class="cart-totals">
         <p>Subtotal: <span id="cart-subtotal"><?php echo money($summary['subtotal']); ?></span></p>
         <p>Tax (6.625%): <span id="cart-tax"><?php echo money($summary['tax']); ?></span></p>
-        <p><strong>Total: <span id="cart-total"><?php echo money($summary['total']); ?></span></strong></p>
+        <p><strong>Total:</strong><strong> <span id="cart-total"><?php echo money($summary['total']); ?></span></strong></p>
         <a href="/checkout.php" class="btn btn-primary">Checkout</a>
 </div>
 

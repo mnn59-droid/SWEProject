@@ -331,7 +331,11 @@ em {
 .standard-grid p { margin: 0; color: var(--muted); font-size: 0.92rem; }
 
 /* ---------- Product page ---------- */
-.page { padding: 40px var(--gutter) 80px; }
+.page { 
+    padding: 40px var(--gutter) 80px;
+max-width: 1000px;
+margin: 0 auto;
+}
 
 .back-link {
     display: inline-block;
@@ -474,6 +478,7 @@ em {
     .announcement-track { animation: none; }
     .product-image img { transition: none; }
     html { scroll-behavior: auto; }
+}
     /* ---------- Roast-level meter ---------- */
 .roast-meter {
     display: flex;
@@ -507,4 +512,88 @@ em {
 
 .product-detail-info .roast-meter { font-size: 0.8rem; }
 .product-detail-info .bean { width: 12px; height: 17px; }
+/* ---------- Cart page ---------- */
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 24px;
+}
+
+.cart-table th {
+    text-align: left;
+    padding: 12px;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);              /* a soft text color */
+    border-bottom: 1px solid var(--line);
+}
+
+.cart-table td {
+    padding: 16px 12px;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--line);
+}
+
+/* image beside the name */
+.cart-product {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.cart-product img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;               /* crops instead of squashing */
+    border-radius: var(--radius);
+}
+
+/* narrow quantity box */
+.qty-input {
+    width: 70px;
+    padding: 8px;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+}
+
+/* right-align the money columns: price (2) and line total (4) */
+.cart-table td:nth-child(2),
+.cart-table td:nth-child(4) {
+    text-align: right;
+}
+
+/* totals box on the right */
+.cart-totals {
+    width: 320px;
+    margin-left: auto;
+    padding: 20px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+}
+
+.cart-totals p {
+    display: flex;
+    justify-content: space-between;  /* label left, amount right */
+    margin: 0 0 8px;
+}
+.remove-item {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    padding: 6px 12px;
+    border-radius: var(--radius);
+    cursor: pointer;
+}
+
+.remove-item:hover {
+    color: var(--danger);
+    border-color: currentColor;
+}
+
+@media (max-width: 600px) {
+    .cart-totals { width: 100%; }
 }

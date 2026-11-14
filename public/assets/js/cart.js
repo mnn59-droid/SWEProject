@@ -58,7 +58,9 @@ document.querySelectorAll('.qty-input').forEach(input => {
         const row = input.closest('tr');
         const lineTotal = row.querySelector('.line-total');
         lineTotal.textContent = '$' + (Number(input.dataset.price) * Number(input.value)).toFixed(2);
-
+        if(Number(input.value) === 0){
+            input.closest('tr').remove();
+        }
         showTotals(data);
     });
 });
