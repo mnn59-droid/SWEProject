@@ -1,6 +1,6 @@
 <?php
 //shared top of every page
-$shopName = "Katura Coffee";
+$shopName = "Marvin's Coffee";
 $pageTitle = isset($pageTitle) ? $pageTitle : $shopName;
 $cartCount = cartCount();
 ?>

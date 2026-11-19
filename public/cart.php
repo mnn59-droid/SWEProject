@@ -10,11 +10,13 @@ include __DIR__ . '/../templates/header.php';
     <h1 class="page-title"> My Cart</h1>
     <?php if (empty($summary['items'])){ ?>
     <p>Please Select items to continue </p>
-    <a href= / >Shop</a>
-
+    <a href="/" class="btn">Continue shopping</a>
+    
     <?php } else { ?>
     <table class="cart-table">
+        <thead>
     <tr><th>Product</th><th>Price</th><th>Quantity</th><th>Total</th><th></th></tr>
+    </thead>
 <tbody>
     <?php foreach ($summary['items'] as $item) { ?> 
 <tr>

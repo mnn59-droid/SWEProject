@@ -60,6 +60,10 @@ document.querySelectorAll('.qty-input').forEach(input => {
         lineTotal.textContent = '$' + (Number(input.dataset.price) * Number(input.value)).toFixed(2);
         if(Number(input.value) === 0){
             input.closest('tr').remove();
+        }else{
+            const row = input.closest('tr');
+            row.querySelector('.line-total').textContent = 
+            '$' + (Number(input.dataset.price) * Number(input.value)).toFixed(2);
         }
         showTotals(data);
     });
