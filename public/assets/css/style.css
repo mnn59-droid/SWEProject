@@ -597,3 +597,98 @@ margin: 0 auto;
 @media (max-width: 600px) {
     .cart-totals { width: 100%; }
 }
+/* ---------- Checkout page ---------- */
+/* Changed: no max-width/margin here, because .page already centers the content */
+.checkout-container {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;     /* form wider than the summary */
+    gap: 2rem;
+    align-items: start;
+    margin-top: 1.5rem;
+}
+
+.checkout-form,
+.cart-summary {
+    background: var(--surface);           /* was #ffffff */
+    border: 1px solid var(--line);        /* was #e2e8f0 */
+    border-radius: var(--radius);
+    padding: 1.5rem;
+}
+
+.cart-summary {
+    position: sticky;                     /* stays in view while scrolling */
+    top: 90px;                            /* below your sticky header */
+    background: var(--surface-2);         /* was #f8fafc */
+}
+
+/* Scoped: these only apply inside the checkout, not across the site */
+.checkout-container h2 {
+    margin-top: 0;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.4rem;
+    color: var(--text);                   /* was #0f172a */
+}
+
+.form-group { margin-bottom: 1rem; }
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;       /* first + last name side by side */
+    gap: 1rem;
+}
+
+.checkout-container label {
+    display: block;                       /* label above its input */
+    margin-bottom: 0.4rem;
+    font-size: 0.85rem;
+    color: var(--muted);                  /* was #334155 */
+}
+
+.checkout-container input {
+    width: 100%;
+    padding: 0.65rem;
+    background: var(--bg);                /* added: dark box */
+    color: var(--text);                   /* added: light text */
+    border: 1px solid var(--line);        /* was #cbd5e1 */
+    border-radius: var(--radius);
+    font: inherit;
+}
+
+.checkout-container input:focus {
+    outline: 2px solid var(--gold);       /* was #2563eb */
+    border-color: transparent;
+}
+
+/* Renamed from .cart-item / .cart-total */
+.summary-item,
+.summary-total {
+    display: flex;
+    justify-content: space-between;       /* label left, amount right */
+    margin-bottom: 0.75rem;
+}
+
+.summary-item span:last-child,
+.summary-total span:last-child {
+    font-variant-numeric: tabular-nums;   /* digits line up */
+}
+
+.summary-total {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;                 /* added: receipt-style separator */
+    border-top: 1px solid var(--line);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.checkout-btn {
+    width: 100%;
+    justify-content: center;              /* centers the text inside .btn's flex */
+    margin-top: 0.5rem;
+}
+
+/* Phones: stack the two columns, with the summary first */
+@media (max-width: 768px) {
+    .checkout-container { grid-template-columns: 1fr; }
+    .cart-summary { order: -1; position: static; }
+}
