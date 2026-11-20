@@ -32,7 +32,21 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     }elseif(mb_strlen($email) > 100){
         $errors['email'] = 'Email must be less than 100 characters';
     }
-
+    if(empty($errors)){
+        try{
+            $orderId = placeOrder($firstname, $lastname, $email);
+            clearCart();
+            $_SESSION['last_order_id'] = $orderId;
+            header('Location: /order-success.php');
+            exit;
+        }catch(PDOException $e){
+            $errors['order'] = 'Sorry, something went wrong placing order. Please try again';
+        }catch(RuntimeException $e){
+            $errors['order'] = $e ->getMessage();
+        }catch (Throwable $e){
+            $errors['order'] = 'Sorry, something went wrong placing order. Please try again';
+        }
+    }
 }
 
 $pageTitle = 'Checkout';
@@ -44,6 +58,9 @@ include __DIR__ . '/../templates/header.php';
     <div class="checkout-container">
         <form method="post" action="/checkout.php" class="checkout-form">
             <h2>Your details</h2>
+            <?php if (isset($errors['order'])) { ?>
+                <p class="error"><?php echo e($errors['order']); ?></p>
+            <?php } ?>
 
             <div class="form-row">
                 <div class="form-group">
