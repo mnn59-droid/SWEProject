@@ -37,6 +37,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $orderId = placeOrder($firstname, $lastname, $email);
             clearCart();
             $_SESSION['last_order_id'] = $orderId;
+            sendOrderEmail($orderId);
             header('Location: /order-success.php');
             exit;
         }catch(PDOException $e){

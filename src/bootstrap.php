@@ -11,5 +11,7 @@ require_once __DIR__ . '/models/Product.php';
 require_once __DIR__ . '/services/Cart.php';
 require_once __DIR__ . '/services/Pricing.php';
 require_once __DIR__ . '/models/Order.php';
+require_once __DIR__ . '/services/Mailer.php';
+
 
 ?>

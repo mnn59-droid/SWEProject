@@ -13,5 +13,10 @@ function env(string $key, $default = null){
     }
     return $value;
 }
-define('TAX_RATE', (float) env('TAX_RATE', 0.6625));
+define('TAX_RATE', (float) env('TAX_RATE', 0.06625));
+define('EMAILJS_SERVICE_ID', env('EMAILJS_SERVICE_ID'));
+define('EMAILJS_TEMPLATE_ID', env('EMAILJS_TEMPLATE_ID'));
+define('EMAILJS_PUBLIC_KEY', env('EMAILJS_PUBLIC_KEY'));
+define('EMAILJS_PRIVATE_KEY', env('EMAILJS_PRIVATE_KEY'));
+define('ADMIN_EMAIL', env('ADMIN_EMAIL'));
 ?>
