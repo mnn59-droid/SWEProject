@@ -724,3 +724,45 @@ margin: 0 auto;
 }
 
 .page-title, .page-subtitle, .shop-filters { max-width: 1200px; margin-left: auto; margin-right: auto; }
+
+.site-header { border-bottom: 1px solid var(--line); position: relative; display: block; }
+.header-inner { max-width: 1200px; margin: 0 auto; padding: 1rem 1.5rem; display: flex; align-items: center; gap: 1.25rem; }
+.brand { display: flex; align-items: center; gap: 0.75rem; color: var(--text); text-decoration: none; }
+.brand-icon { width: 40px; height: 40px; border: 1px solid var(--gold); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--gold); }
+.wordmark { font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; }
+.site-nav { margin-left: auto; display: flex; gap: 1.5rem; }
+.site-nav a { color: var(--muted); text-decoration: none; font-weight: 500; }
+.site-nav a:hover { color: var(--text); }
+.cart-link { position: relative; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: var(--text); }
+.cart-badge { position: absolute; top: 2px; right: 0; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 99px; background: var(--gold); color: var(--bg); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.menu-toggle { display: none; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 10px; background: transparent; color: var(--text); align-items: center; justify-content: center; cursor: pointer; }
+
+@media (max-width: 720px) {
+  .menu-toggle { display: flex; }
+  .cart-link { margin-left: auto; }
+  .site-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0; background: var(--bg); border-bottom: 1px solid var(--line); padding: 0 1.5rem; z-index: 10; }
+  .site-nav.open { display: flex; }
+  .site-nav a { padding: 0.9rem 0; border-top: 1px solid var(--line); }
+}
+
+.site-nav a.active { color: var(--gold); }
+
+.shop-toolbar {
+    max-width: 1200px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    justify-content: space-between;   
+    align-items: center;
+    flex-wrap: wrap;                 
+    gap: 1rem;
+}
+.shop-toolbar .page-subtitle,
+.shop-toolbar .shop-filters { margin: 0; }
+
+.page-title {
+    text-align: center;          
+    margin: 3.5rem auto 2.5rem;  
+}
+.shop-toolbar {
+    margin-bottom: 2rem;         
+}
