@@ -4,5 +4,6 @@
 </footer>
 <script src="/assets/js/cart.js"></script>
 <script src="/assets/js/menu.js"></script>
+<script src="/assets/js/hero.js"></script>
 </body>
 </html>

@@ -10,6 +10,9 @@ include __DIR__ . '/../templates/header.php';
 ?>
 
 <h1 class="page-title">Welcome to <?php echo e($shopName) ?></h1>
+<?php if ($category === '') { ?>
+  <?php include __DIR__ . '/../templates/hero.php'; ?>
+<?php } ?>
 
 <div class="shop-toolbar">
   <p class="page-subtitle"><?php echo count($products) ?> products available</p>
