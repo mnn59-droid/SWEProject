@@ -25,4 +25,11 @@ function getAllCategories(): array
 {
     return db()->query('SELECT DISTINCT category FROM products ORDER BY category')->fetchAll(PDO::FETCH_COLUMN);
 }
+
+function deleteProduct(int $id): void{
+
+    $stmt = db() -> prepare('DELETE FROM products WHERE id = :id');
+    $stmt -> execute(['id' => $id]);
+}
+
 ?>
