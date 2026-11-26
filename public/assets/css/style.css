@@ -696,3 +696,7 @@ margin: 0 auto;
     font-size: 0.8rem;
     color: var(--danger);
 }
+.admin-orders table { width: 100%; border-collapse: collapse; }
+.admin-orders th, .admin-orders td { padding: 0.75rem; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.admin-orders small { color: var(--muted); }
+.admin-bar { display: flex; justify-content: space-between; align-items: center; }

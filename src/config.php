@@ -2,7 +2,7 @@
 
 //loads settings from .env file
 require_once __DIR__ . '/../vendor/autoload.php';
-
+date_default_timezone_set('America/New_York');
 $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->safeLoad();
 

@@ -86,4 +86,21 @@ function placeOrder(string $firstname, string $lastname, string $email): int
         throw $e;
     }
 }
+function getAllOrders(): array{
+    $stmt = db()-> query('SELECT id, firstname, lastname, customer_email, total, status, created_at
+    FROM orders ORDER BY created_at DESC');
+
+    return $stmt->fetchAll();
+}
+
+function getItemsByOrder(): array{
+    $stmt = db()->query('SELECT order_id, product_name, quantity, unit_price
+    FROM order_items ORDER BY order_id, id');
+
+    $grouped = [];
+    foreach($stmt->fetchAll() as $row){
+        $grouped[$row['order_id']][] = $row;
+    }
+    return $grouped;
+}
 ?>
