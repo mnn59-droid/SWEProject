@@ -1,4 +1,5 @@
 <?php
+const ORDER_STATUSES = ['pending','shipped','completed','cancelled'];
 function placeOrder(string $firstname, string $lastname, string $email): int
 {
     $pdo  = db();
@@ -102,5 +103,9 @@ function getItemsByOrder(): array{
         $grouped[$row['order_id']][] = $row;
     }
     return $grouped;
+}
+function updateOrderStatus(int $orderId, string $status): void{
+    $stmt = db()->prepare('UPDATE orders SET status = :status WHERE id = :id');
+    $stmt->execute(['status' => $status, 'id' => $orderId]);
 }
 ?>

@@ -1,6 +1,17 @@
 <?php
 require_once __DIR__ . '/../../src/bootstrap.php';
 requireAdmin();
+if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+    verifyCsrf();
+    $orderId = (int) ($_POST['order_id'] ?? 0);
+    $status = $_POST['status'] ?? '';
+
+    if ($orderId > 0 && in_array($status, ORDER_STATUSES, true)){
+        updateOrderStatus($orderId, $status);
+    }
+    header('Location: /admin/orders.php');
+    exit;
+}
 
 $orders = getAllOrders();
 $itemsByOrder = getItemsByOrder();
@@ -34,7 +45,18 @@ $itemsByOrder = getItemsByOrder();
                     <?php } ?>
                 </td>
                 <td><?= money($order['total']) ?></td>
-                <td><?= e($order['status']) ?></td>
+                <td>
+                        <form method="post" class="status-form">
+                            <?= csrfField() ?>
+                            <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
+                            <select name="status">
+                            <?php foreach (ORDER_STATUSES as $s) { ?>
+                                <option value="<?= $s ?>" <?= $s === $order['status'] ? 'selected' : '' ?>><?= ucfirst($s) ?></option>
+                            <?php } ?>
+                            </select>
+                            <button type="submit">Save</button>
+                        </form>
+                </td>
                 </tr>
                 <?php } ?>
             </tbody>
