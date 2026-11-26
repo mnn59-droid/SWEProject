@@ -9,7 +9,7 @@ if ($id > 0 && $product === null) {
     exit;
 }
 
-// Starting values: the product being edited, or blanks for a new one
+
 $form = $product ?? [
     'product_name' => '', 'description' => '', 'price' => '', 'stock' => '',
     'category' => '', 'image_path' => '', 'roast_level' => 3,
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'price'        => trim($_POST['price'] ?? ''),
         'stock'        => trim($_POST['stock'] ?? ''),
         'category'     => trim($_POST['category'] ?? ''),
-        'image_path'   => trim($_POST['image_path'] ?? ''),
+        'image_path'   => $product['image_path'] ?? '',
         'roast_level'  => trim($_POST['roast_level'] ?? ''),
     ];
 
@@ -46,13 +46,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors['category'] = 'Category is required.';
     }
     if ($roast === false) {
-        $errors['roast_level'] = 'Roast level must be 1–5.';
+        $errors['roast_level'] = 'Roast level must be 1 – 5.';
     }
-    if ($form['image_path'] === '') {
-        $errors['image_path'] = 'Image path is required (upload comes in 9.7).';
+    $allowed = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
+    $upload  = $_FILES['image'] ?? null;
+    $newExt  = null;
+
+    if ($upload && $upload['error'] === UPLOAD_ERR_OK) {
+        $mime = (new finfo(FILEINFO_MIME_TYPE))->file($upload['tmp_name']);   
+        if (!isset($allowed[$mime])) {
+            $errors['image'] = 'Only JPG, PNG or WebP images are allowed.';
+        } elseif ($upload['size'] > 2 * 1024 * 1024) {                  
+            $errors['image'] = 'Image must be 2 MB or smaller.';
+        } else {
+            $newExt = $allowed[$mime];
+        }
+    } elseif ($upload && $upload['error'] !== UPLOAD_ERR_NO_FILE) {
+        $errors['image'] = 'Upload failed. Try a smaller image.';
+    } elseif ($form['image_path'] === '') {
+        $errors['image'] = 'Please choose an image.';                       
     }
 
     if (empty($errors)) {
+        if ($newExt !== null) {
+            $fileName = bin2hex(random_bytes(8)) . '.' . $newExt;
+            $target   = __DIR__ . '/../assets/img/products/' . $fileName;
+            if (!move_uploaded_file($upload['tmp_name'], $target)) {                          
+                exit('Could not save the image.');
+            }
+            $form['image_path'] = 'img/products/' . $fileName;
+        }
+                 
+
         $data = $form;
         $data['price'] = $price;
         $data['stock'] = $stock;
@@ -73,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <h1><?= $id > 0 ? 'Edit product' : 'Add product' ?></h1>
   <p><a href="/admin/products.php">← Back to products</a></p>
 
-  <form method="post" novalidate>
+  <form method="post" enctype="multipart/form-data"   novalidate>
     <?= csrfField() ?>
 
     <?php
@@ -83,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'price'        => 'Price ($)',
         'stock'        => 'Stock',
         'roast_level'  => 'Roast level (1 light – 5 dark)',
-        'image_path'   => 'Image path (e.g. img/products/guatemala.jpg)',
+        
     ];
     foreach ($fields as $name => $label) { ?>
       <label><?= $label ?>
@@ -91,6 +116,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </label>
       <?php if (isset($errors[$name])) { ?><p class="error"><?= e($errors[$name]) ?></p><?php } ?>
     <?php } ?>
+
+            <?php if ($form['image_path'] !== '') { ?>
+        <p><img src="/assets/<?= e($form['image_path']) ?>" alt="" width="96" style="border-radius:8px"></p>
+        <?php } ?>
+        <label>Product image (JPG, PNG or WebP, max 2 MB)
+        <input type="file" name="image" accept="image/jpeg,image/png,image/webp">
+        </label>
+        <?php if (isset($errors['image'])) { ?><p class="error"><?= e($errors['image']) ?></p><?php } ?>
 
     <label>Description
       <textarea name="description" rows="4"><?= e($form['description']) ?></textarea>
