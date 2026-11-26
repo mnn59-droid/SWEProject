@@ -4,7 +4,9 @@ require_once __DIR__ . '/../../src/bootstrap.php';
 $errors = [];
 $email = trim($_POST['email'] ?? '');
 
+
 if($_SERVER['REQUEST_METHOD']==='POST'){
+    verifyCsrf();
     $password = $_POST['password'] ?? '';
 
     $stmt = db() -> prepare('SELECT id, password_hash FROM admins WHERE email = :email');
@@ -20,7 +22,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     $errors['login'] = 'Invalid email or password.';
 }
 ?>
-<?php require __DIR__ . '/../../templates/admin-header.php'; ?>
+<?php require __DIR__ . '/../../templates/header.php'; ?>
 <main class="page">
 
 <h1>Admin login</h1>
@@ -28,6 +30,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     <p class="error"><?= e($errors['login']) ?></p>
     <?php } ?>
     <form method="post">
+        <?= csrfField() ?>
         <label> Email <input type="email" name="email" value="<?= e($email) ?>" required></label>
         <label>Password <input type="password" name="password" required></label>
         <button type="submit">Login</button>
