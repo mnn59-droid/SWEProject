@@ -1,4 +1,11 @@
 <?php 
+const PRODUCT_SORTS = [
+    'featured'  => ['Featured',   'id ASC'],
+    'price_asc' => ['Price: Low to High',  'price ASC'],
+    'price_desc'=> ['Price: High to Low', 'price DESC'],
+    'name'      => ['Name A-Z', 'product_name ASC'],
+    'roast'     => ['Roast: light to dark', 'roast_level ASC NULLS LAST'],
+];
 //all database queries for the products
 //page calls these functions instead of writing SQL queries directly in the page
 
@@ -14,7 +21,7 @@ function getAllProducts(): array
 //one product by its id or null if not found
 function getProductById(int $id): ?array
 {
-    $sql = 'SELECT id, product_name, description, price, stock, category, image_path FROM products WHERE id = :id';
+    $sql = 'SELECT id, product_name, description, price, stock, category, image_path , roast_level FROM products WHERE id = :id';
     $stmt = db()->prepare($sql);
     $stmt->execute(['id' => $id]);
     $product = $stmt->fetch();
@@ -44,5 +51,21 @@ function updateProduct(int $id, array $d): void{
     $d['id'] = $id;
     $stmt -> execute($d);
 }
+function getProducts(string $category = '', string $sort = 'featured'): array
+{
+    $orderBy = (PRODUCT_SORTS[$sort] ?? PRODUCT_SORTS['featured'])[1];   
 
+    $sql    = 'SELECT id, product_name, description, price, stock, category, image_path, roast_level FROM products';
+    $params = [];
+
+    if ($category !== '') {
+        $sql .= ' WHERE category = :category';                           
+        $params['category'] = $category;
+    }
+    $sql .= ' ORDER BY ' . $orderBy;
+
+    $stmt = db()->prepare($sql);
+    $stmt->execute($params);
+    return $stmt->fetchAll();
+}
 ?>
