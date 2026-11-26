@@ -17,11 +17,16 @@ $orders = getAllOrders();
 $itemsByOrder = getItemsByOrder();
 ?>
 <?php require __DIR__ . '/../../templates/header.php'; ?>
-<main class="page admin-orders">
-    <div class="admin-bar">
-        <h1>Orders</h1>
+<div class="page admin-orders">
+<div class="admin-bar">
+    <h1>Orders</h1>
+    <nav>
+        <a href="/admin/orders.php">Orders</a> ·
+        <a href="/admin/products.php">Products</a> ·
+        <a href="/admin/product-form.php">+ Add product</a> ·
         <a href="/admin/logout.php">Logout</a>
-    </div>
+    </nav>
+</div>
 
     <?php if (empty($orders)) { ?>
         <p>No orders found.</p>
@@ -62,6 +67,6 @@ $itemsByOrder = getItemsByOrder();
             </tbody>
         </table>
     <?php } ?>
-    </main>
+                            </div>
 <?php require __DIR__ . '/../../templates/footer.php'; ?>
 

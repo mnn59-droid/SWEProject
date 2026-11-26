@@ -17,7 +17,7 @@ $products = getAllProducts();
 
 ?>
 <?php require __DIR__ . '/../../templates/header.php'; ?>
-<main class="page admin-orders">
+<div class="page admin-orders">
     <div class="admin-bar">
         <h1>Products</h1>
         <nav>
@@ -52,7 +52,7 @@ $products = getAllProducts();
             <?php } ?>
         </tbody>
     </table>
-            </main>
+            </div>
 
             <?php require __DIR__ . '/../../templates/footer.php'; ?>
 

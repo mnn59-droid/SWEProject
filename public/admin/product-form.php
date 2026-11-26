@@ -94,9 +94,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 <?php require __DIR__ . '/../../templates/header.php'; ?>
-<main class="page checkout-container">
-  <h1><?= $id > 0 ? 'Edit product' : 'Add product' ?></h1>
-  <p><a href="/admin/products.php">← Back to products</a></p>
+<div class="page admin-form">
+  <div class="admin-bar">
+    <h1><?= $id > 0 ? 'Edit product' : 'Add product' ?></h1>
+    <nav>
+      <a href="/admin/orders.php">Orders</a> ·
+      <a href="/admin/products.php">Products</a> ·
+      <a href="/admin/logout.php">Logout</a>
+    </nav>
+  </div>
+  <p><a href="/admin/products.php" class="back-link">← Back to products</a></p>
 
   <form method="post" enctype="multipart/form-data"   novalidate>
     <?= csrfField() ?>
@@ -131,5 +138,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <button type="submit"><?= $id > 0 ? 'Save changes' : 'Add product' ?></button>
   </form>
-</main>
+</div>
 <?php require __DIR__ . '/../../templates/footer.php'; ?>

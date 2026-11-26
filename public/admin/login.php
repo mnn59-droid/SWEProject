@@ -23,7 +23,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 }
 ?>
 <?php require __DIR__ . '/../../templates/header.php'; ?>
-<main class="page">
+<div class="page">
 
 <h1>Admin login</h1>
 <?php if (isset($errors['login'])) { ?>
@@ -35,5 +35,5 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         <label>Password <input type="password" name="password" required></label>
         <button type="submit">Login</button>
     </form>
-    </main>
+</div>
  <?php require __DIR__ . '/../../templates/footer.php'; ?>

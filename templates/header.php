@@ -29,6 +29,10 @@ $cartCount = cartCount();
                 <?php foreach ($navCategories as $navCat) { ?>
                     <a href="/?category=<?= urlencode($navCat) ?>" <?= $currentCat === $navCat ? 'class="active"' : '' ?>><?= e($navCat) ?></a>
                 <?php } ?>
+
+                <?php if (!empty($_SESSION['admin_id'])) { ?>
+                    <a href="/admin/orders.php" class="admin-link">Admin</a>
+                <?php } ?>
             </nav>
 
             <a href="/cart.php" class="cart-link" aria-label="Cart">
