@@ -31,5 +31,18 @@ function deleteProduct(int $id): void{
     $stmt = db() -> prepare('DELETE FROM products WHERE id = :id');
     $stmt -> execute(['id' => $id]);
 }
+function createProduct(array $d): void{
+    $stmt = db() -> prepare('INSERT INTO products (product_name, description, price, stock, category, image_path, roast_level)
+    VALUES (:product_name, :description, :price, :stock, :category, :image_path, :roast_level)');
+    $stmt -> execute($d);
+}
+
+function updateProduct(int $id, array $d): void{
+    $stmt = db() -> prepare('UPDATE products SET product_name = :product_name, description = :description, price = :price,
+     stock = :stock, category = :category, image_path = :image_path, roast_level = :roast_level
+     WHERE id = :id');
+    $d['id'] = $id;
+    $stmt -> execute($d);
+}
 
 ?>
